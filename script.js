@@ -10,7 +10,7 @@ let displayDatabase = document.querySelector("#display")
 let inputButton = document.querySelector("#inputButton")
 
 
-
+// DOM
 function summonDOM(param) {
 
    displayDatabase.innerHTML="";
@@ -19,11 +19,15 @@ function summonDOM(param) {
 
         let cards = document.createElement("DIV")
         
-        cards.innerHTML = `${items.nama}`
+        cards.innerHTML = `<p>${items.nama}</p>`
+
+        
 
         displayDatabase.appendChild(cards)
 
         creatingButton(items.id)
+
+        
         
 
     });
@@ -55,28 +59,37 @@ readDatabase()
 // POST
 const postDatabase = () => {
 
+
+
         let inputForm = document.querySelector("#inputForm").value
         let inputObj = {
                        nama : inputForm
                        }
         let dataJSON = JSON.stringify(inputObj)
 
+
+      
+
         fetch (url , {
             method : "POST",
             headers: {'Content-Type' : 'application/json'},
             body: dataJSON
            })
+        
+           
 
         .then(hasil => readDatabase())
-       // .then(data => readDatabase())
         .catch(err => console.log(err))
-    
+
+        document.querySelector("#inputForm").value = "";
+
 
 }
 
 inputButton.addEventListener("click", postDatabase);
 
 
+// DELETE & UPDATE
 const creatingButton = (param) => {
 
     // delete
